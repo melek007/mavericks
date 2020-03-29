@@ -1,0 +1,30 @@
+void initialiser_enigme(enigme t[20])
+{int i,j,k;char line[256],question[256];
+FILE *file = NULL;
+TTF_Init();
+TTF_Font *fontquestion = NULL;
+TTF_Font *fontanswer = NULL;
+SDL_Color textColor = { 0, 0, 0 };
+fontquestion = TTF_OpenFont("Blanka-Regular.ttf", 80);
+fontanswer = TTF_OpenFont("Orbitron Light.ttf", 60);
+for(i=0;i<10;i++)
+{
+t[i].correct=0;
+t[i].pos.x=0;t[i].pos.y=0;
+t[i].used=0;
+t[i].type=0;
+t[i].background=NULL;
+t[i].background=IMG_Load("backenigme.png");
+t[i].question=NULL;
+file=fopen("question.txt","r");
+for(j=0;j<i+1;j++)
+fgets(line,sizeof(line), file);
+sprintf(question,"%s",line);
+t[i].question=TTF_RenderText_Blended(fontquestion,line,textColor);
+fclose(file);file=fopen("answer.txt","r");
+for(j=0;j<i+1;j++) 
+for(k=0;k<4;k++)
+{fgets(line,sizeof(line), file);
+sprintf(question,"%s",line);
+t[i].answers[k]=TTF_RenderText_Blended(fontanswer,question,textColor);}
+}}
