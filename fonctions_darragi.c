@@ -21,3 +21,24 @@ do{p.pos.y=p.pos.y-5;}while(color_test(p.background[1],p)==1);
 SDL_Flip(ecran);}(*souris)=0;
 return p;
 }
+perso animate_initialisation(perso p)
+{
+p.p[0][0]=IMG_Load("w1.png");
+p.p[0][1]=IMG_Load("w2.png");
+p.p[0][2]=IMG_Load("w3.png");
+p.p[0][3]=IMG_Load("w4.png");
+p.p[1][0]=IMG_Load("w5.png");
+p.p[1][1]=IMG_Load("w6.png");
+p.p[1][2]=IMG_Load("w7.png");
+p.p[1][3]=IMG_Load("w8.png");
+return p;
+}
+perso animate_animation(perso p)
+{
+if(p.direction==p.previous_direction) {if(p.num!=3) p.num++; else p.num=0;}
+else p.num=0;p.previous_direction=p.direction;return p;
+}
+void animate_blit(perso p,SDL_Surface *ecran)
+{
+  SDL_BlitSurface(p.p[p.direction][p.num], NULL, ecran, &p.pos);
+}
